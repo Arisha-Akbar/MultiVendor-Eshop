@@ -1,0 +1,17 @@
+import mongoose from "mongoose";
+import Shop from "../model/shop.model.js";
+import User from "../model/user.model.js";
+
+const connectDatabase=()=>{
+    mongoose.connect(process.env.DB_URL).then(async (data)=>{
+        console.log(`MongoDB connected with server: ${data.connection.host}`)
+        try {
+            await Promise.all([Shop.syncIndexes(), User.syncIndexes()]);
+        } catch (e) {
+            console.log(`Index sync warning: ${e.message}`);
+        }
+    })
+}
+
+
+export default connectDatabase
