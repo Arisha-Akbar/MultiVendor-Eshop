@@ -1,4 +1,3 @@
-
 // navigation Data
 export const navItems = [
   {
@@ -99,9 +98,24 @@ export const brandingData = [
     Description: "Get Factory direct price",
     icon: (
       <svg width="32" height="35" viewBox="0 0 32 35" fill="none">
-        <path d="M7 13H5.5C2.95 13 1 11.05 1 8.5V1H7" stroke="#FFBB38" strokeWidth="2" strokeMiterlimit="10" />
-        <path d="M25 13H26.5C29.05 13 31 11.05 31 8.5V1H25" stroke="#FFBB38" strokeWidth="2" strokeMiterlimit="10" />
-        <path d="M16 28V22" stroke="#FFBB38" strokeWidth="2" strokeMiterlimit="10" />
+        <path
+          d="M7 13H5.5C2.95 13 1 11.05 1 8.5V1H7"
+          stroke="#FFBB38"
+          strokeWidth="2"
+          strokeMiterlimit="10"
+        />
+        <path
+          d="M25 13H26.5C29.05 13 31 11.05 31 8.5V1H25"
+          stroke="#FFBB38"
+          strokeWidth="2"
+          strokeMiterlimit="10"
+        />
+        <path
+          d="M16 28V22"
+          stroke="#FFBB38"
+          strokeWidth="2"
+          strokeMiterlimit="10"
+        />
         <path
           d="M16 22C11.05 22 7 17.95 7 13V1H25V13C25 17.95 20.95 22 16 22Z"
           stroke="#FFBB38"
@@ -126,7 +140,13 @@ export const brandingData = [
     Description: "100% protected payments",
     icon: (
       <svg width="32" height="38" viewBox="0 0 32 38" fill="none">
-        <path d="M22.6654 18.667H9.33203V27.0003H22.6654V18.667Z" stroke="#FFBB38" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="square" />
+        <path
+          d="M22.6654 18.667H9.33203V27.0003H22.6654V18.667Z"
+          stroke="#FFBB38"
+          strokeWidth="2"
+          strokeMiterlimit="10"
+          strokeLinecap="square"
+        />
         <path
           d="M12.668 18.6663V13.6663C12.668 11.833 14.168 10.333 16.0013 10.333C17.8346 10.333 19.3346 11.833 19.3346 13.6663V18.6663"
           stroke="#FFBB38"
@@ -153,7 +173,7 @@ export const categoriesData = [
     title: "Computers and Laptops",
     subTitle: "",
     image_Url:
-      "https://cdn.shopify.com/s/files/1/1706/9177/products/NEWAppleMacbookProwithM1ProChip14InchLaptop2021ModelMKGQ3LL_A_16GB_1TBSSD_custommacbd.jpg?v=1659592838",
+      "https://images.unsplash.com/photo-1484788984921-03950022c9ef?q=80&w=932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: 2,
@@ -181,14 +201,13 @@ export const categoriesData = [
     title: "Shoes",
     subTitle: "",
     image_Url:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvBQPQMVNRd6TtDkGs2dCri0Y-rxKkFOiEWw&usqp=CAU",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&auto=format&fit=crop",
   },
   {
     id: 6,
     title: "Gifts",
     subTitle: "",
-    image_Url:
-      "https://images.unsplash.com/photo-1607082350899-7e105aa886ae",
+    image_Url: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae",
   },
   {
     id: 7,
@@ -279,7 +298,6 @@ export const productData = [
     rating: 5,
     total_sell: 80,
     stock: 10,
-  
   },
   {
     id: 1,
@@ -310,7 +328,6 @@ export const productData = [
     rating: 4,
     total_sell: 75,
     stock: 10,
-    
   },
   {
     id: 4,
@@ -335,7 +352,7 @@ export const productData = [
         url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
       },
       ratings: 4.2,
-      category: "Others"
+      category: "Others",
     },
     price: 100,
     discount_price: 79,
@@ -350,13 +367,13 @@ export const productData = [
       "Product details are a crucial part of any eCommerce website or online marketplace. These details help the potential customers to make an informed decision about the product they are interested in buying. A well-written product description can also be a powerful marketing tool that can help to increase sales.Product details typically include information about the product's features, specifications, dimensions, weight, materials, and other relevant information that can help customers to understand the product better. The product details section should also include high-quality images and videos of the product, as well as customer reviews and ratings.",
     image_Url: [
       {
-      public_id: "test",
-      url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-    },
-    {
-      public_id: "test",
-      url: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb",
-    },
+        public_id: "test",
+        url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+      },
+      {
+        public_id: "test",
+        url: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb",
+      },
     ],
     shop: {
       name: "Alisha Shoes Mart",
@@ -371,7 +388,7 @@ export const productData = [
     rating: 5,
     total_sell: 49,
     stock: 10,
-    category:"Shoes"
+    category: "Shoes",
   },
   {
     id: 1,
@@ -410,7 +427,7 @@ export const productData = [
     ],
     total_sell: 20,
     stock: 10,
-    category: "Music and Gaming"
+    category: "Music and Gaming",
   },
   {
     id: 4,
@@ -552,11 +569,11 @@ export const productData = [
 export const footerProductLinks = [
   {
     name: "About us",
-    link: "/about"
+    link: "/about",
   },
   {
     name: "Careers",
-    link: "/carrers"
+    link: "/carrers",
   },
   {
     name: "Store Locations",
