@@ -16,7 +16,7 @@ import { RxCross1 } from "react-icons/rx";
 import { categoriesData, productData } from "../../static/data";
 import { server } from "../../server.js";
 import Cart from "../Cart/Cart.jsx";
-import WishList from "../WishList/WishList.jsx";
+import WishList from "../WishList/WishList";
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
   const { allProducts } = useSelector((state) => state.products);
@@ -38,11 +38,9 @@ const Header = ({ activeHeading }) => {
     if (term.trim() === "") {
       setSearchData(null);
     } else {
-      const filteredProducts =
-        allProducts &&
-        allProducts.filter((product) =>
-          product.name.toLowerCase().includes(term.toLowerCase()),
-        );
+      const filteredProducts = productData.filter((product) =>
+        product.name.toLowerCase().includes(term.toLowerCase()),
+      );
       setSearchData(filteredProducts);
     }
   };
@@ -86,7 +84,7 @@ const Header = ({ activeHeading }) => {
                   <Link to={`/product/${i._id}`} key={index}>
                     <div className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 border-b border-gray-50 last:border-0">
                       <img
-                        src={`${i.images?.[0]?.url}`}
+                        src={i.image_Url?.[0]?.url}
                         alt=""
                         className="w-9 h-9 rounded-md object-cover"
                       />

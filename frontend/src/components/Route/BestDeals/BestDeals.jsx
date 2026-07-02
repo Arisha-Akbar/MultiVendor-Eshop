@@ -8,10 +8,17 @@ const BestDeals = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const d =
-      productData && productData.sort((a, b) => b.total_sell - a.total_sell);
-    const firstFive = d.slice(0, 5);
-    setData(firstFive);
+    const d = productData
+      .sort((a, b) => b.total_sell - a.total_sell)
+      .slice(0, 5)
+      .map((item) => ({
+        ...item,
+        images: item.image_Url, // image_Url → images
+        discountPrice: item.discount_price, // discount_price → discountPrice
+        originalPrice: item.price, // price → originalPrice
+        sold_out: item.total_sell, // total_sell → sold_out
+      }));
+    setData(d);
   }, []);
 
   return (
