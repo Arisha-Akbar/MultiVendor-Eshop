@@ -9,13 +9,14 @@ import {
   BestSellingPage,
   EventsPage,
   FAQPage,
+  ProfilePage,
   ProductDetailsPage,
 } from "./routes/Routes.js";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loadUser } from "./redux/actions/user.js";
-
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { server } from "./server";
@@ -50,6 +51,7 @@ const App = () => {
           <Route path='/product/:id' element={<ProductDetailsPage />} />
         <Route path="/best-selling" element={<BestSellingPage />} />
         <Route path="/events" element={<EventsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         <Route path="/faq" element={<FAQPage />} />
       </Routes>
