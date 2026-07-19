@@ -6,9 +6,11 @@ import {
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { server } from "../../server";
-import styles from "../../styles/style";
-import { DataGrid } from "@material-ui/data-grid";
-import { Button } from "@material-ui/core";
+import styles from "../../styles/style"; // Line 6
+import { DataGrid } from "@mui/x-data-grid";
+
+// Line 7
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { MdTrackChanges } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
@@ -22,7 +24,7 @@ import { Country, State } from "country-state-city";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { getAllOrdersOfUser } from "../../redux/actions/order";
+import { getAllOrdersOfUser } from "../../redux/actions/order.js";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -61,7 +63,7 @@ const ProfileContent = ({ active }) => {
             { avatar: reader.result },
             {
               withCredentials: true,
-            }
+            },
           )
           .then((response) => {
             dispatch(loadUser());
@@ -470,7 +472,7 @@ const ChangePassword = () => {
       .put(
         `${server}/user/update-user-password`,
         { oldPassword, newPassword, confirmPassword },
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then((res) => {
         toast.success(res.data.success);
@@ -571,8 +573,8 @@ const Address = () => {
           address1,
           address2,
           zipCode,
-          addressType
-        )
+          addressType,
+        ),
       );
       setOpen(false);
       setCountry("");
