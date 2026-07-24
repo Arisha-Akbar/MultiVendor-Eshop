@@ -133,7 +133,7 @@ const UserOrderDetails = () => {
               <img
                 src={`${selectedItem?.images[0]?.url}`}
                 alt=""
-                className="w-[80px] h-[80px]"
+                className="w-20 h-[80px]"
               />
               <div>
                 <div className="pl-3 text-[20px]">{selectedItem?.name}</div>
@@ -175,7 +175,7 @@ const UserOrderDetails = () => {
             <div className="w-full ml-3">
               <label className="block text-[20px] font-[500]">
                 Write a comment
-                <span className="ml-1 font-[400] text-[16px] text-[#00000052]">
+                <span className="ml-1 font-normal text-[16px] text-[#00000052]">
                   (optional)
                 </span>
               </label>
@@ -209,7 +209,7 @@ const UserOrderDetails = () => {
       <br />
       <div className="w-full 800px:flex items-center">
         <div className="w-full 800px:w-[60%]">
-          <h4 className="pt-3 text-[20px] font-[600]">Shipping Address:</h4>
+          <h4 className="pt-3 text-[20px] font-semibold">Shipping Address:</h4>
           <h4 className="pt-3 text-[20px]">
             {data?.shippingAddress.address1 +
               " " +

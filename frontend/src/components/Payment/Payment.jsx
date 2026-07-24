@@ -111,7 +111,7 @@ const Payment = () => {
       const { data } = await axios.post(
         `${server}/payment/process`,
         paymentData,
-        config
+        config,
       );
 
       const client_secret = data.client_secret;
@@ -164,15 +164,15 @@ const Payment = () => {
     };
 
     await axios
-    .post(`${server}/order/create-order`, order, config)
-    .then((res) => {
-      setOpen(false);
-      navigate("/order/success");
-      toast.success("Order successful!");
-      localStorage.setItem("cartItems", JSON.stringify([]));
-      localStorage.setItem("latestOrder", JSON.stringify([]));
-      window.location.reload();
-    });
+      .post(`${server}/order/create-order`, order, config)
+      .then((res) => {
+        setOpen(false);
+        navigate("/order/success");
+        toast.success("Order successful!");
+        localStorage.setItem("cartItems", JSON.stringify([]));
+        localStorage.setItem("latestOrder", JSON.stringify([]));
+        window.location.reload();
+      });
   };
 
   return (
@@ -221,7 +221,7 @@ const PaymentInfo = ({
               <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
             ) : null}
           </div>
-          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
+          <h4 className="text-[18px] pl-2 font-semibold text-[#000000b1]">
             Pay with Debit/credit card
           </h4>
         </div>
@@ -313,7 +313,7 @@ const PaymentInfo = ({
               <input
                 type="submit"
                 value="Submit"
-                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-semibold`}
               />
             </form>
           </div>
@@ -332,7 +332,7 @@ const PaymentInfo = ({
               <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
             ) : null}
           </div>
-          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
+          <h4 className="text-[18px] pl-2 font-semibold text-[#000000b1]">
             Pay with Paypal
           </h4>
         </div>
@@ -341,7 +341,7 @@ const PaymentInfo = ({
         {select === 2 ? (
           <div className="w-full flex border-b">
             <div
-              className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+              className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-semibold`}
               onClick={() => setOpen(true)}
             >
               Pay Now
@@ -356,18 +356,18 @@ const PaymentInfo = ({
                       onClick={() => setOpen(false)}
                     />
                   </div>
-                    <PayPalScriptProvider
-                      options={{
-                        "client-id":
-                          "Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn",
-                      }}
-                    >
-                      <PayPalButtons
-                        style={{ layout: "vertical" }}
-                        onApprove={onApprove}
-                        createOrder={createOrder}
-                      />
-                    </PayPalScriptProvider>
+                  <PayPalScriptProvider
+                    options={{
+                      "client-id":
+                        "Aczac4Ry9_QA1t4c7TKH9UusH3RTe6onyICPoCToHG10kjlNdI-qwobbW9JAHzaRQwFMn2-k660853jn",
+                    }}
+                  >
+                    <PayPalButtons
+                      style={{ layout: "vertical" }}
+                      onApprove={onApprove}
+                      createOrder={createOrder}
+                    />
+                  </PayPalScriptProvider>
                 </div>
               </div>
             )}
@@ -387,7 +387,7 @@ const PaymentInfo = ({
               <div className="w-[13px] h-[13px] bg-[#1d1a1acb] rounded-full" />
             ) : null}
           </div>
-          <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
+          <h4 className="text-[18px] pl-2 font-semibold text-[#000000b1]">
             Cash on Delivery
           </h4>
         </div>
@@ -399,7 +399,7 @@ const PaymentInfo = ({
               <input
                 type="submit"
                 value="Confirm"
-                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
+                className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-semibold`}
               />
             </form>
           </div>
@@ -414,20 +414,24 @@ const CartData = ({ orderData }) => {
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
-        <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
+        <h3 className="text-[16px] font-normal text-[#000000a4]">subtotal:</h3>
+        <h5 className="text-[18px] font-semibold">
+          ${orderData?.subTotalPrice}
+        </h5>
       </div>
       <br />
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
-        <h5 className="text-[18px] font-[600]">${shipping}</h5>
+        <h3 className="text-[16px] font-normal text-[#000000a4]">shipping:</h3>
+        <h5 className="text-[18px] font-semibold">${shipping}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? "$" + orderData.discountPrice : "-"}</h5>
+        <h3 className="text-[16px] font-normal text-[#000000a4]">Discount:</h3>
+        <h5 className="text-[18px] font-semibold">
+          {orderData?.discountPrice ? "$" + orderData.discountPrice : "-"}
+        </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">
+      <h5 className="text-[18px] font-semibold text-end pt-3">
         ${orderData?.totalPrice}
       </h5>
       <br />

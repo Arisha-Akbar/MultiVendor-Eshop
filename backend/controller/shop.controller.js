@@ -42,7 +42,7 @@ router.post(
 
       const activationToken = createActivationToken(seller);
 
-      const activationUrl = `https://multi-vendor-ecom-seven.vercel.app/shop/activation/${activationToken}`;
+      const activationUrl = `https://multi-vendor--seven..app/shop/activation/${activationToken}`;
 
       try {
         await sendMail({
