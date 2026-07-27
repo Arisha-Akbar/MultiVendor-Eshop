@@ -25,16 +25,16 @@ import {
   ShopHomePage,
   ShopDashboardPage,
   ShopCreateProduct,
-  ShopAllProduct,
+  ShopAllProducts,
   ShopCreateEvents,
-  ShopAllEvent,
+  ShopAllEvents,
   ShopAllCoupons,
   ShopPreviewPage,
   ShopAllOrders,
   ShopOrderDetails,
   ShopAllRefunds,
   ShopSettingsPage,
-  ShopWithdrawMoneyPage,
+  ShopWithDrawMoneyPage,
   ShopInboxPage,
 } from "./routes/ShopRoutes.js";
 import {
@@ -189,7 +189,7 @@ const App = () => {
             path="/dashboard-products"
             element={
               <SellerProtectedRoute>
-                <ShopAllProduct />
+                <ShopAllProducts />
               </SellerProtectedRoute>
             }
           />
@@ -205,7 +205,7 @@ const App = () => {
             path="/dashboard-events"
             element={
               <SellerProtectedRoute>
-                <ShopAllEvent />
+                <ShopAllEvents />
               </SellerProtectedRoute>
             }
           />
@@ -237,7 +237,7 @@ const App = () => {
             path="/dashboard-withdraw-money"
             element={
               <SellerProtectedRoute>
-                <ShopWithdrawMoneyPage />
+                <ShopWithDrawMoneyPage />
               </SellerProtectedRoute>
             }
           />

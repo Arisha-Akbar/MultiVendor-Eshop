@@ -91,7 +91,7 @@ const Footer = () => {
         </span>
         <span className="text-xs text-white/35">Terms · Privacy Policy</span>
         <img
-          src="https://hamat-shop..app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffooter-payment.a37c49ac.png&w=640&q=75"
+          src="https://hamat-shop.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffooter-payment.a37c49ac.png&w=640&q=75"
           alt=""
           className="h-6 opacity-40"
         />

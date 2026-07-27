@@ -1,9 +1,9 @@
 import React from "react";
-import DashboardHeader from "../../components/Shop/Layout/DashboardHeader";
-import DashboardSideBar from "../../components/Shop/Layout/DashboardSideBar";
+import DashboardHeader from "../../components/Shop/Layout/DashboardHeader.jsx";
+import DashboardSideBar from "../../components/Shop/Layout/DashboardSideBar.jsx";
 import AllCoupons from "../../components/Shop/AllCoupons.jsx";
 
-const ShopAllCoupouns = () => {
+const ShopAllCoupons = () => {
   return (
     <div>
       <DashboardHeader />
@@ -19,4 +19,4 @@ const ShopAllCoupouns = () => {
   );
 };
 
-export default ShopAllCoupouns;
+export default ShopAllCoupons;

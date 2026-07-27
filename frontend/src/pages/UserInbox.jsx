@@ -8,8 +8,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import { TfiGallery } from "react-icons/tfi";
-import styles from "../styles/style";
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT =
+  import.meta.env.VITE_SOCKET_ENDPOINT || "http://localhost:4000/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const UserInbox = () => {
@@ -45,14 +45,14 @@ const UserInbox = () => {
   useEffect(() => {
     const getConversation = async () => {
       try {
-        const resonse = await axios.get(
+        const response = await axios.get(
           `${server}/conversation/get-all-conversation-user/${user?._id}`,
           {
             withCredentials: true,
           },
         );
 
-        setConversations(resonse.data.conversations);
+        setConversations(response.data.conversations);
       } catch (error) {
         // console.log(error);
       }
@@ -200,7 +200,7 @@ const UserInbox = () => {
   };
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ beahaviour: "smooth" });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -208,7 +208,7 @@ const UserInbox = () => {
       {!open && (
         <>
           <Header />
-          <h1 className="text-center text-[30px] py-3 font-Poppins">
+          <h1 className="text-center text-7.5 py-3 font-Poppins">
             All Messages
           </h1>
           {/* All messages list */}
@@ -303,9 +303,9 @@ const MessageList = ({
           className="w-12.5 h-12.5 rounded-full"
         />
         {online ? (
-          <div className="w-[12px] h-[12px] bg-green-400 rounded-full absolute top-[2px] right-[2px]" />
+          <div className="w-3 h-3 bg-green-400 rounded-full absolute top-0.5 right-0.5" />
         ) : (
-          <div className="w-[12px] h-[12px] bg-[#c7b9b9] rounded-full absolute top-[2px] right-[2px]" />
+          <div className="w-3 h-3 bg-[#c7b9b9] rounded-full absolute top-0.5 right-0.5" />
         )}
       </div>
       <div className="pl-3">
@@ -341,7 +341,7 @@ const SellerInbox = ({
           <img
             src={`${userData?.avatar?.url}`}
             alt=""
-            className="w-[60px] h-[60px] rounded-full"
+            className="w-15 h-15 rounded-full"
           />
           <div className="pl-3">
             <h1 className="text-[18px] font-semibold">{userData?.name}</h1>
@@ -368,27 +368,27 @@ const SellerInbox = ({
               {item.sender !== sellerId && (
                 <img
                   src={`${userData?.avatar?.url}`}
-                  className="w-[40px] h-[40px] rounded-full mr-3"
+                  className="w-10 h-10 rounded-full mr-3"
                   alt=""
                 />
               )}
               {item.images && (
                 <img
                   src={`${item.images?.url}`}
-                  className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2"
+                  className="w-75 h-75 object-cover rounded-[10px] ml-2 mb-2"
                 />
               )}
               {item.text !== "" && (
                 <div>
                   <div
                     className={`w-max p-2 rounded ${
-                      item.sender === sellerId ? "bg-[#000]" : "bg-[#38c776]"
-                    } text-[#fff] h-min`}
+                      item.sender === sellerId ? "bg-black" : "bg-[#38c776]"
+                    } text-white h-min`}
                   >
                     <p>{item.text}</p>
                   </div>
 
-                  <p className="text-[12px] text-[#000000d3] pt-1">
+                  <p className="text-3 text-[#000000d3] pt-1">
                     {format(item.createdAt)}
                   </p>
                 </div>
@@ -403,7 +403,7 @@ const SellerInbox = ({
         className="p-3 relative w-full flex justify-between items-center"
         onSubmit={sendMessageHandler}
       >
-        <div className="w-[30px]">
+        <div className="w-7.5">
           <input
             type="file"
             name=""

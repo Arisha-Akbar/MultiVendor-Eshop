@@ -8,7 +8,7 @@ const ShopAllRefunds = () => {
     <div>
       <DashboardHeader />
       <div className="flex justify-between w-full">
-        <div className="w-20 800px:w-w-82.5">
+        <div className="w-20 800px:w-82.5">
           <DashboardSideBar active={10} />
         </div>
         <div className="w-full justify-center flex">
