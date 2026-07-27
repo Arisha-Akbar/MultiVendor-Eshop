@@ -3,7 +3,7 @@ import AdminHeader from "../../components/Admin/Layout/AdminHeader";
 import AdminSideBar from "../../components/Admin/Layout/AdminSideBar";
 import AllWithdraw from "../../components/Admin/AllWithdraw";
 
-const AdminDashboardWithdraw = () => {
+const AdminDashboardWithdrawPage = () => {
   return (
     <div>
       <AdminHeader />
@@ -19,4 +19,4 @@ const AdminDashboardWithdraw = () => {
   );
 };
 
-export default AdminDashboardWithdraw;
+export default AdminDashboardWithdrawPage;
