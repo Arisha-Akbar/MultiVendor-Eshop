@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import { Router } from "express";
 import cloudinary from "cloudinary";
 import User from "../model/user.model.js";
@@ -166,21 +166,22 @@ router.get(
   }),
 );
 
-
 //user logout
-router.get("/logout", isAuthenticated, catchAsyncErrors(async (req, res, next) => {
-try{
-res.cookie("token", null, {
-  expires: new Date(Date.now()),
-  httpOnly: true,
-});
-res.status(200).json({
-  success: true,
-  message: "Logged out successfully",
-});
-}catch (error) {
-
-}
-}))
+router.get(
+  "/logout",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      res.cookie("token", null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      });
+      res.status(200).json({
+        success: true,
+        message: "Logged out successfully",
+      });
+    } catch (error) {}
+  }),
+);
 
 export default router;

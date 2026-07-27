@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import { Router } from "express";
 import cloudinary from "cloudinary";
 import Shop from "../model/shop.model.js";
@@ -38,7 +38,7 @@ router.post(
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
         zipCode: req.body.zipCode,
-      };  
+      };
 
       const activationToken = createActivationToken(seller);
 
@@ -408,6 +408,3 @@ router.delete(
 );
 
 export default router;
-
-
-

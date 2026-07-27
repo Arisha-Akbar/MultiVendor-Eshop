@@ -4,8 +4,7 @@ import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import { isSeller, isAuthenticated, isAdmin } from "../middleware/auth.js";
 import Withdraw from "../model/withdraw.model.js";
 import sendMail from "../utils/sendMail.js";
-import express from "express";
-const router = Router();
+import { Router } from "express";
 import { Router } from "express";
 // create withdraw request --- only for seller
 router.post(

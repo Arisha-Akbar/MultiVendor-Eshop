@@ -1,11 +1,11 @@
 import { Server } from "socket.io";
 import http from "http";
-import express from "express";
+import express, { Router } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 const app = express();
 const server = http.createServer(app);
-// ✅ create socket server
+// create socket server
 const io = new Server(server, {
   cors: {
     origin: "ht", // or your frontend URL
