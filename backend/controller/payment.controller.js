@@ -26,7 +26,7 @@ router.post(
       amount: req.body.amount,
       currency: "USD",
       metadata: {
-        company: "e-comShop",
+        company: "OShop",
       },
     });
     res.status(200).json({

@@ -145,7 +145,7 @@ router.post(
 
 //load user
 router.get(
-  "/get-user",
+  "/getuser",
   isAuthenticated,
   catchAsyncErrors(async (req, res, next) => {
     try {
