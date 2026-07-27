@@ -5,7 +5,7 @@ import { isSeller, isAuthenticated, isAdmin } from "../middleware/auth.js";
 import Withdraw from "../model/withdraw.model.js";
 import sendMail from "../utils/sendMail.js";
 import { Router } from "express";
-import { Router } from "express";
+const router = Router();
 // create withdraw request --- only for seller
 router.post(
   "/create-withdraw-request",

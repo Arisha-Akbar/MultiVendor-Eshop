@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Router } from "express";
 import cloudinary from "cloudinary";
 import User from "../model/user.model.js";
 import ErrorHandler from "../utils/ErrorHandler.js";

@@ -8,9 +8,9 @@ const server = http.createServer(app);
 // create socket server
 const io = new Server(server, {
   cors: {
-    origin: "ht", // or your frontend URL
-    methods: ["GET", "POST"],
-  },
+  origin: "http://localhost:5173", 
+  methods: ["GET", "POST"],
+},
 });
 
 dotenv.config({

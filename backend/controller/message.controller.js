@@ -2,7 +2,6 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import { Router } from "express";
-import { Router } from "express";
 import Messages from "../model/messages.model.js";
 import cloudinary from "cloudinary";
 
