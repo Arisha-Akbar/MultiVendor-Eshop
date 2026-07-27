@@ -1,4 +1,3 @@
-
 import { Router } from "express";
 import cloudinary from "cloudinary";
 import Shop from "../model/shop.model.js";
@@ -42,7 +41,8 @@ router.post(
 
       const activationToken = createActivationToken(seller);
 
-      const activationUrl = `https://multi-vendor--seven..app/shop/activation/${activationToken}`;
+      const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+      const activationUrl = `${frontendUrl}/shop/activation/${activationToken}`;
 
       try {
         await sendMail({
@@ -243,7 +243,7 @@ router.put(
         { shopId: req.seller.id },
         {
           $set: {
-            shop: existsSeller, // 🔥 overwrite full shop object
+            shop: existsSeller, // overwrite full shop object
           },
         },
       );
@@ -251,7 +251,7 @@ router.put(
         { shopId: req.seller.id },
         {
           $set: {
-            shop: existsSeller, // 🔥 overwrite full shop object
+            shop: existsSeller, // overwrite full shop object
           },
         },
       );
@@ -290,7 +290,7 @@ router.put(
         { shopId: req.seller.id },
         {
           $set: {
-            shop: shop, // 🔥 overwrite full shop object
+            shop: shop, //  overwrite full shop object
           },
         },
       );
@@ -298,7 +298,7 @@ router.put(
         { shopId: req.seller.id },
         {
           $set: {
-            shop: shop, // 🔥 overwrite full shop object
+            shop: shop, //  overwrite full shop object
           },
         },
       );

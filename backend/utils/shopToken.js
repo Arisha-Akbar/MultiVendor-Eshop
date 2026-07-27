@@ -17,4 +17,4 @@ const sendShopToken = (user, statusCode, res) => {
   });
 };
 
-module.exports = sendShopToken;
+export default sendShopToken;

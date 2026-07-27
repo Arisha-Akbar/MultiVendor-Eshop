@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsFillBagFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../styles/styles";
+import styles from "../styles/style";
 import { getAllOrdersOfUser } from "../redux/actions/order";
 import { server } from "../server";
 import { RxCross1 } from "react-icons/rx";

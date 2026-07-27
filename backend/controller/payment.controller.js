@@ -39,7 +39,7 @@ router.post(
 router.get(
   "/stripeapikey",
   catchAsyncErrors(async (req, res, next) => {
-    res.status(200).json({ stripeApikey: process.env.STRIPE_API_KEY });
+    res.status(200).json({ stripeApikey: process.env.STRIPE_PUBLISHABLE_KEY });
   }),
 );
 
