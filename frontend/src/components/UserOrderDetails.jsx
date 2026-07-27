@@ -125,7 +125,7 @@ const UserOrderDetails = () => {
                 className="cursor-pointer"
               />
             </div>
-            <h2 className="text-[30px] font-[500] font-Poppins text-center">
+            <h2 className="text-[30px] font-medium font-Poppins text-center">
               Give a Review
             </h2>
             <br />
@@ -147,7 +147,7 @@ const UserOrderDetails = () => {
             <br />
 
             {/* ratings */}
-            <h5 className="pl-3 text-[20px] font-[500]">
+            <h5 className="pl-3 text-[20px] font-medium">
               Give a Rating <span className="text-red-500">*</span>
             </h5>
             <div className="flex w-full ml-2 pt-1">
@@ -173,7 +173,7 @@ const UserOrderDetails = () => {
             </div>
             <br />
             <div className="w-full ml-3">
-              <label className="block text-[20px] font-[500]">
+              <label className="block text-[20px] font-medium">
                 Write a comment
                 <span className="ml-1 font-normal text-[16px] text-[#00000052]">
                   (optional)

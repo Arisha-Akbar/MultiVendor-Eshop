@@ -7,21 +7,20 @@ import { Link } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { deleteProduct } from "../../redux/actions/product";
 import Loader from "../Layout/Loader";
+import axios from "axios";
+import { server } from "../../server";
+import { useState } from "react";
 
 const AllProducts = () => {
-  const { products, isLoading } = useSelector((state) => state.products);
-  const { seller } = useSelector((state) => state.seller);
-
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllProductsShop(seller._id));
-  }, [dispatch]);
-
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-    window.location.reload();
-  };
+    axios
+      .get(`${server}/product/admin-all-products`, { withCredentials: true })
+      .then((res) => {
+        setData(res.data.products);
+      });
+  }, []);
 
   const columns = [
     { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
@@ -71,29 +70,12 @@ const AllProducts = () => {
         );
       },
     },
-    {
-      field: "Delete",
-      flex: 0.8,
-      minWidth: 120,
-      headerName: "",
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <>
-            <Button onClick={() => handleDelete(params.id)}>
-              <AiOutlineDelete size={20} />
-            </Button>
-          </>
-        );
-      },
-    },
   ];
 
   const row = [];
 
-  products &&
-    products.forEach((item) => {
+  data &&
+    data.forEach((item) => {
       row.push({
         id: item._id,
         name: item.name,
@@ -105,19 +87,15 @@ const AllProducts = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="w-full mx-8 pt-1 mt-10 bg-white">
-          <DataGrid
-            rows={row}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            autoHeight
-          />
-        </div>
-      )}
+      <div className="w-full mx-8 pt-1 mt-10 bg-white">
+        <DataGrid
+          rows={row}
+          columns={columns}
+          pageSize={10}
+          disableSelectionOnClick
+          autoHeight
+        />
+      </div>
     </>
   );
 };

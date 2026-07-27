@@ -167,7 +167,7 @@ const ShippingInfo = ({
 }) => {
   return (
     <div className="w-full 800px:w-[95%] bg-white rounded-md p-5 pb-8">
-      <h5 className="text-[18px] font-[500]">Shipping Address</h5>
+      <h5 className="text-[18px] font-medium">Shipping Address</h5>
       <br />
       <form>
         <div className="w-full flex pb-3">

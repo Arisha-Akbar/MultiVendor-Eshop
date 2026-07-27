@@ -38,7 +38,7 @@ router.post(
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
         zipCode: req.body.zipCode,
-      };
+      };  
 
       const activationToken = createActivationToken(seller);
 
@@ -408,3 +408,6 @@ router.delete(
 );
 
 export default router;
+
+
+

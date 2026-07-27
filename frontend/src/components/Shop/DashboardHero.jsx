@@ -6,8 +6,8 @@ import { MdBorderClear } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { getAllProductsShop } from "../../redux/actions/product";
-import { Button } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
+import { Button } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 
 const DashboardHero = () => {
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ const DashboardHero = () => {
               <span className="text-[16px]">(with 10% service charge)</span>
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
+          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
             ${availableBalance}
           </h5>
           <Link to="/dashboard-withdraw-money">
@@ -119,7 +119,7 @@ const DashboardHero = () => {
               All Orders
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
+          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
             {orders && orders.length}
           </h5>
           <Link to="/dashboard-orders">
@@ -140,7 +140,7 @@ const DashboardHero = () => {
               All Products
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">
+          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
             {products && products.length}
           </h5>
           <Link to="/dashboard-products">
