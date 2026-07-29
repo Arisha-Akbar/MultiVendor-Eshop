@@ -55,7 +55,8 @@ const DashboardMessages = () => {
 
         setConversations(response.data.conversations);
       } catch (error) {
-        // console.log(error);
+          console.error("Failed to fetch conversations:", error);
+  toast.error("Failed to load messages");
       }
     };
     getConversation();

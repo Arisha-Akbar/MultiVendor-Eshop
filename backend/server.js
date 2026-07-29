@@ -3,6 +3,12 @@ import app from "./app.js";
 import connectDatabase from "./db/database.js";
 import connectCloudinary from "./config/cloudinary.js";
 // handling uncaught exception
+
+// create server
+const server = app.listen(process.env.PORT, () => {
+  console.log(`server on runing on http://localhost:${process.env.PORT}`);
+});
+
 process.on("uncaughtException", (err) => {
   console.log(`Error : ${err.message}`);
   console.log("Shutting down the server for handling uncaught exception");
