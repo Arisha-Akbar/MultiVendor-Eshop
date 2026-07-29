@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Layout/Header";
 import { useSelector } from "react-redux";
 import socketIO from "socket.io-client";
+import styles from "../styles/style";
 import { format } from "timeago.js";
 import { server } from "../server";
 import axios from "axios";
@@ -54,7 +55,7 @@ const UserInbox = () => {
 
         setConversations(response.data.conversations);
       } catch (error) {
-         console.log(error);
+        console.log(error);
       }
     };
     getConversation();

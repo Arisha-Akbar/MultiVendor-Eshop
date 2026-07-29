@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
@@ -55,8 +56,8 @@ const DashboardMessages = () => {
 
         setConversations(response.data.conversations);
       } catch (error) {
-          console.error("Failed to fetch conversations:", error);
-  toast.error("Failed to load messages");
+        console.error("Failed to fetch conversations:", error);
+        toast.error("Failed to load messages");
       }
     };
     getConversation();

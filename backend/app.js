@@ -1,5 +1,4 @@
 import express from "express";
-import { Router } from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 const app = express();
@@ -9,7 +8,7 @@ import errorMiddleware from "./middleware/error.js";
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
   }),
 );

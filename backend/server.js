@@ -30,11 +30,6 @@ connectDatabase();
 
 connectCloudinary();
 
-// create server
-const server = app.listen(process.env.PORT, () => {
-  console.log(`server on runing on http://localhost:${process.env.PORT}`);
-});
-
 // unhandled promise rejection
 process.on("unhandledRejection", (err) => {
   console.log(`Shutting down the server for ${err.message}`);
