@@ -108,11 +108,15 @@ const ProductDetailsCard = ({ setOpen, data }) => {
             {/* Mobile: image smaller + shop info side by side */}
             <div className="flex gap-4 800px:flex-col 800px:gap-4">
               <div className="w-30 h-30 800px:w-full 800px:aspect-square shrink-0 bg-gray-50 rounded-xl overflow-hidden flex items-center justify-center">
-                <img
-                  src={`${data.images && data?.images[0]?.url}`}
-                  alt=""
-                  className="w-full h-full object-contain p-2"
-                />
+                {data.images && data?.images[0]?.url ? (
+                  <img
+                    src={data.images[0].url}
+                    alt=""
+                    className="w-full h-full object-contain p-2"
+                  />
+                ) : (
+                  <div className="text-gray-400 text-sm">No Image Available</div>
+                )}
               </div>
 
               {/* Shop info —> beside image on mobile */}
@@ -121,11 +125,17 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   to={`/shop/preview/${data.shop._id}`}
                   className="flex items-center gap-2"
                 >
-                  <img
-                    src={data.shop.avatar?.url}
-                    alt=""
-                    className="w-8 h-8 rounded-full object-cover"
-                  />
+                  {data.shop.avatar?.url ? (
+                    <img
+                      src={data.shop.avatar.url}
+                      alt=""
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">
+                      {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                    </div>
+                  )}
                   <div>
                     <p className="text-sm font-medium text-teal-600">
                       {data.shop.name}
@@ -150,11 +160,17 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                 to={`/shop/preview/${data.shop._id}`}
                 className="flex items-center gap-3"
               >
-                <img
-                  src={data.shop.avatar?.url}
-                  alt=""
-                  className="w-11 h-11 rounded-full object-cover"
-                />
+                {data.shop.avatar?.url ? (
+                  <img
+                    src={data.shop.avatar.url}
+                    alt=""
+                    className="w-11 h-11 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-11 h-11 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
+                    {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                  </div>
+                )}
                 <div>
                   <p className="text-sm font-medium text-teal-600">
                     {data.shop.name}

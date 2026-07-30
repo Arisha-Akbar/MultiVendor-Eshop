@@ -65,11 +65,17 @@ const ProductCard = ({ data, isEvent }) => {
         to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}
       >
         <div className="w-full h-45 bg-gray-50 flex items-center justify-center overflow-hidden">
-          <img
-            src={`${data.images && data.images[0]?.url}`}
-            alt=""
-            className="h-full w-full object-contain p-3 hover:scale-105 transition-transform duration-300"
-          />
+          {data.images && data.images[0]?.url ? (
+            <img
+              src={data.images[0].url}
+              alt=""
+              className="h-full w-full object-contain p-3 hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div className="h-full w-full flex items-center justify-center text-gray-400 text-sm">
+              No Image Available
+            </div>
+          )}
         </div>
       </Link>
 

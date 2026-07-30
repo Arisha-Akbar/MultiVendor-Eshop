@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../../styles/style";
-import { productData } from "../../../static/data";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../../../redux/actions/product";
 import ProductCard from "../ProductCard/ProductCard.jsx";
 
 const BestDeals = () => {
+  const { allProducts, isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const d = productData
-      .sort((a, b) => b.total_sell - a.total_sell)
-      .slice(0, 5)
-      .map((item) => ({
-        ...item,
-        images: item.image_Url, // image_Url → images
-        discountPrice: item.discount_price, // discount_price → discountPrice
-        originalPrice: item.price, // price → originalPrice
-        sold_out: item.total_sell, // total_sell → sold_out
-      }));
-    setData(d);
-  }, []);
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (allProducts && allProducts.length > 0) {
+      const d = allProducts
+        .sort((a, b) => (b.sold_out || 0) - (a.sold_out || 0))
+        .slice(0, 5);
+      setData(d);
+    }
+  }, [allProducts]);
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div>
