@@ -5,20 +5,35 @@ import Header from "../components/Layout/Header";
 import Loader from "../components/Layout/Loader.jsx";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/style";
-import { productData } from "../static/data.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../redux/actions/product";
 
 function ProductPage() {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
+  const { allProducts, isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (categoryData === null) {
-      setData(productData);
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (allProducts && allProducts.length > 0) {
+      if (categoryData === null) {
+        setData(allProducts);
+      } else {
+        setData(allProducts.filter((i) => i.category === categoryData));
+      }
     } else {
-      setData(productData.filter((i) => i.category === categoryData));
+      setData([]);
     }
-  }, [categoryData]);
+  }, [categoryData, allProducts]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>

@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import styles from "../../../styles/style";
 import ProductCard from "../ProductCard/ProductCard";
 
 const FeaturedProduct = () => {
-  const {allProducts} = useSelector((state) => state.products);
+  const { allProducts, isLoading } = useSelector((state) => state.products);
+  
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div>
       <div className={`${styles.section}`}>
@@ -13,10 +18,12 @@ const FeaturedProduct = () => {
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6.25 lg:grid-cols-4 lg:gap-6.25 xl:grid-cols-5 xl:gap-7.5 mb-12 border-0">
         {
-            allProducts && allProducts.length !== 0 &&(
+            allProducts && allProducts.length !== 0 ? (
               <>
-               {allProducts && allProducts.map((i, index) => <ProductCard data={i} key={index} />)}
+               {allProducts.map((i, index) => <ProductCard data={i} key={index} />)}
               </>
+            ) : (
+              <p className="text-center text-gray-500">No products available</p>
             )
            }
         </div>

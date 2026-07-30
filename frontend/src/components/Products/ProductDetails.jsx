@@ -119,9 +119,10 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={`${data && data.images[select]?.url}`}
+                  src={data && data.images[select]?.url ? data.images[select].url : ''}
                   alt=""
                   className="w-[80%]"
+                  onError={(e) => { e.target.style.display = 'none'; }}
                 />
                 <div className="w-full flex">
                   {data &&
@@ -132,10 +133,11 @@ const ProductDetails = ({ data }) => {
                         } cursor-pointer`}
                       >
                         <img
-                          src={`${i?.url}`}
+                          src={i?.url || ''}
                           alt=""
                           className="h-50 overflow-hidden mr-3 mt-3"
                           onClick={() => setSelect(index)}
+                          onError={(e) => { e.target.style.display = 'none'; }}
                         />
                       </div>
                     ))}
@@ -206,11 +208,17 @@ const ProductDetails = ({ data }) => {
                 </div>
                 <div className="flex items-center pt-8">
                   <Link to={`/shop/preview/${data?.shop._id}`}>
-                    <img
-                      src={`${data?.shop?.avatar?.url}`}
-                      alt=""
-                      className="w-12.5 h-12.5 rounded-full mr-2"
-                    />
+                    {data?.shop?.avatar?.url ? (
+                      <img
+                        src={data.shop.avatar.url}
+                        alt=""
+                        className="w-12.5 h-12.5 rounded-full mr-2"
+                      />
+                    ) : (
+                      <div className="w-12.5 h-12.5 rounded-full mr-2 bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
+                        {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                      </div>
+                    )}
                   </Link>
                   <div className="pr-8">
                     <Link to={`/shop/preview/${data?.shop._id}`}>
@@ -312,11 +320,17 @@ const ProductDetailsInfo = ({
           {data &&
             data.reviews.map((item, index) => (
               <div className="w-full flex my-2">
-                <img
-                  src={`${item.user.avatar?.url}`}
-                  alt=""
-                  className="w-12.5 h-12.5 rounded-full"
-                />
+                {item.user.avatar?.url ? (
+                  <img
+                    src={item.user.avatar.url}
+                    alt=""
+                    className="w-12.5 h-12.5 rounded-full"
+                  />
+                ) : (
+                  <div className="w-12.5 h-12.5 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
+                    {item.user.name?.charAt(0)?.toUpperCase() || 'U'}
+                  </div>
+                )}
                 <div className="pl-2 ">
                   <div className="w-full flex items-center">
                     <h1 className="font-mediun mr-3">{item.user.name}</h1>
@@ -340,11 +354,17 @@ const ProductDetailsInfo = ({
           <div className="w-full 800px:w-[50%]">
             <Link to={`/shop/preview/${data.shop._id}`}>
               <div className="flex items-center">
-                <img
-                  src={`${data?.shop?.avatar?.url}`}
-                  className="w-12.5 h-12.5 rounded-full"
-                  alt=""
-                />
+                {data?.shop?.avatar?.url ? (
+                  <img
+                    src={data.shop.avatar.url}
+                    className="w-12.5 h-12.5 rounded-full"
+                    alt=""
+                  />
+                ) : (
+                  <div className="w-12.5 h-12.5 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
+                    {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                  </div>
+                )}
                 <div className="pl-3">
                   <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
                   <h5 className="pb-2 text-[15px]">
