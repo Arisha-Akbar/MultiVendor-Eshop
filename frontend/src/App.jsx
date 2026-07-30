@@ -65,8 +65,13 @@ const App = () => {
   const dispatch = useDispatch();
   const [stripeApiKey, setStripeApiKey] = useState("");
   async function getStripeApikey() {
-    const { data } = await axios.get(`${server}/payment/stripeapikey`);
-    setStripeApiKey(data.stripeApikey);
+    try {
+      const { data } = await axios.get(`${server}/payment/stripeapikey`);
+      setStripeApiKey(data.stripeApikey);
+    } catch (error) {
+      console.error("Failed to load Stripe key:", error);
+      toast.error("Payment system unavailable");
+    }
   }
   useEffect(() => {
     dispatch(loadUser());

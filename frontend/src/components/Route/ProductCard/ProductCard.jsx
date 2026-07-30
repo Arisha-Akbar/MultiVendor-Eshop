@@ -26,12 +26,13 @@ const ProductCard = ({ data, isEvent }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (wishlist && wishlist.find((i) => i._id === data._id)) {
-      setClick(true);
+    if (wishlist && Array.isArray(wishlist)) {
+      const isInWishlist = wishlist.some((item) => item._id === data._id);
+      setClick(isInWishlist);
     } else {
       setClick(false);
     }
-  }, [wishlist]);
+  }, [wishlist, data._id]);
 
   const removeFromWishlistHandler = (data) => {
     setClick(!click);
