@@ -74,7 +74,6 @@ const CartSingle = ({ data, removeFromCartHandler }) => {
     if (newQty < 1) return;
     const updatedData = { ...data, qty: newQty };
     dispatch({ type: "addToCart", payload: updatedData });
-    localStorage.setItem("cartItems", JSON.stringify(updatedData));
     setValue(newQty);
   };
 
