@@ -11,7 +11,7 @@ import { isAdmin, isAuthenticated } from "../middleware/auth.js";
 const router = Router();
 
 // create user
-router.post("/create-user", async (req, res, next) => {
+router.post("/create-user", catchAsyncErrors(async (req, res, next) => {
   try {
     const { name, email, password, avatar } = req.body;
     const userEmail = await User.findOne({ email });
@@ -36,7 +36,7 @@ router.post("/create-user", async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `${process.env.FRONTEND_URL}/activation/${activation_token}`;
+    const activationUrl = `${process.env.FRONTEND_URL}/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -54,7 +54,7 @@ router.post("/create-user", async (req, res, next) => {
   } catch (error) {
     return next(new ErrorHandler(error.message, 400));
   }
-});
+}));
 
 //create activation token
 const createActivationToken = (user) => {

@@ -3,10 +3,38 @@ import { createReducer } from "@reduxjs/toolkit";
 const initialState = {
   loading: false,
   isAuthenticated: false,
+  user: null,
 };
 
 export const userReducer = createReducer(initialState, (builder) => {
   builder
+    // Login
+    .addCase("LoginRequest", (state) => {
+      state.loading = true;
+    })
+    .addCase("LoginSuccess", (state, action) => {
+      state.isAuthenticated = true;
+      state.loading = false;
+      state.user = action.payload;
+    })
+    .addCase("LoginFail", (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.isAuthenticated = false;
+    })
+    // Signup
+    .addCase("CreateUserRequest", (state) => {
+      state.loading = true;
+    })
+    .addCase("CreateUserSuccess", (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    })
+    .addCase("CreateUserFail", (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+    // Load User
     .addCase("LoadUserRequest", (state) => {
       state.loading = true;
     })
