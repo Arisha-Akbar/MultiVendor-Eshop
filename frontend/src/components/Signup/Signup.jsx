@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
-import axios from "axios";
-import { server } from "../../server";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../redux/actions/user";
 import { toast } from "react-toastify";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, message, error } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -37,19 +40,22 @@ const Signup = () => {
       toast.error("Password must be at least 6 characters long");
       return;
     }
-    axios
-      .post(`${server}/user/create-user`, { name, email, password, avatar })
-      .then((res) => {
-        toast.success(res.data.message);
-        setName("");
-        setEmail("");
-        setPassword("");
-        setAvatar(null);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-      });
+    dispatch(createUser(name, email, password, avatar));
   };
+
+  React.useEffect(() => {
+    if (message) {
+      toast.success(message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setAvatar(null);
+      navigate("/login");
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [message, error, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

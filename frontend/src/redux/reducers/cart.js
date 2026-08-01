@@ -14,9 +14,12 @@ export const cartReducer = createReducer(initialState, (builder) => {
             const isItemExist = state.cart.find((i) => i._id === item._id);
             let updatedCart;
             if (isItemExist) {
-                updatedCart = state.cart.map((i) => (i._id === isItemExist._id ? item : i));
+                // Update quantity for existing item
+                updatedCart = state.cart.map((i) => 
+                    i._id === isItemExist._id ? { ...i, qty: item.qty || i.qty } : i
+                );
             } else {
-                updatedCart = [...state.cart, item];
+                updatedCart = [...state.cart, { ...item, qty: item.qty || 1 }];
             }
             localStorage.setItem("cartItems", JSON.stringify(updatedCart));
             return {

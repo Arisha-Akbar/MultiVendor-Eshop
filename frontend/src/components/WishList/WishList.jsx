@@ -86,9 +86,10 @@ const CartSingle = ({ data, removeFromWishlistHandler, addToCartHandler }) => {
           onClick={() => removeFromWishlistHandler(data)}
         />
         <img
-          src="https://images.unsplash.com/photo-1781429235828-55c8c31baf38?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
+          src={data.images?.[0]?.url || ''}
+          alt={data.name}
           className="w-32.5 h-min ml-2 mr-2 rounded-[5px]"
+          onError={(e) => { e.target.style.display = 'none'; }}
         />
 
         <div className="pl-1.25">
