@@ -12,24 +12,27 @@ export const wishlistReducer = createReducer(initialState, (builder) => {
       const item = action.payload;
       // Check if item already exists using optional chaining for safety
       const isItemExist = state.wishlist.find((i) => i._id === item._id);
+      let updatedWishlist;
       if (isItemExist) {
         // Item exists, don't add duplicate - just return current state
-        return {
-          ...state,
-        };
+        updatedWishlist = [...state.wishlist];
       } else {
         // Add new item to wishlist
-        return {
-          ...state,
-          wishlist: [...state.wishlist, item],
-        };
+        updatedWishlist = [...state.wishlist, item];
       }
+      localStorage.setItem("wishlistItems", JSON.stringify(updatedWishlist));
+      return {
+        ...state,
+        wishlist: updatedWishlist,
+      };
     })
     .addCase("removeFromWishlist", (state, action) => {
       const payloadId = typeof action.payload === 'string' ? action.payload : action.payload._id;
+      const updatedWishlist = state.wishlist.filter((i) => i._id !== payloadId);
+      localStorage.setItem("wishlistItems", JSON.stringify(updatedWishlist));
       return {
         ...state,
-        wishlist: state.wishlist.filter((i) => i._id !== payloadId),
+        wishlist: updatedWishlist,
       };
     });
 });

@@ -1,38 +1,34 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/style";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { server } from "../../server";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux/actions/user";
 import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, isAuthenticated, error } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await axios
-      .post(
-        `${server}/user/login-user`,
-        {
-          email,
-          password,
-        },
-        { withCredentials: true },
-      )
-      .then((res) => {
-        toast.success("Login Success!");
-        navigate("/");
-        window.location.reload(true);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+    dispatch(loginUser(email, password));
   };
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      toast.success("Login Success!");
+      navigate("/");
+      window.location.reload(true);
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [isAuthenticated, error, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -122,9 +118,10 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="group relative w-full h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                disabled={loading}
+                className="group relative w-full h-10 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
               >
-                Submit
+                {loading ? "Logging in..." : "Submit"}
               </button>
             </div>
             <div className={`${styles.normalFlex} w-full`}>

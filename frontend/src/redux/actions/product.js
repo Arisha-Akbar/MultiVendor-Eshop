@@ -20,7 +20,7 @@ export const createProduct =
         type: "productCreateRequest",
       });
 
-      await axios.post(
+      const { data } = await axios.post(
         `${server}/product/create-product`,
         {
           name,
@@ -42,7 +42,7 @@ export const createProduct =
     } catch (error) {
       dispatch({
         type: "productCreateFail",
-        payload: error.response.data.message,
+        payload: error.response?.data?.message || error.message,
       });
     }
   };
@@ -63,7 +63,7 @@ export const getAllProductsShop = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllProductsShopFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -86,7 +86,7 @@ export const deleteProduct = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "deleteProductFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -106,7 +106,7 @@ export const getAllProducts = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllProductsFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

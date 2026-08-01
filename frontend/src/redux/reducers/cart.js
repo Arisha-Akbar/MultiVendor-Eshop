@@ -12,23 +12,24 @@ export const cartReducer = createReducer(initialState, (builder) => {
         .addCase("addToCart", (state, action) => {
             const item = action.payload;
             const isItemExist = state.cart.find((i) => i._id === item._id);
+            let updatedCart;
             if (isItemExist) {
-                return {
-                    ...state,
-                    cart: state.cart.map((i) => (i._id === isItemExist._id ? item : i)),
-                };
+                updatedCart = state.cart.map((i) => (i._id === isItemExist._id ? item : i));
             } else {
-                return {
-                    ...state,
-                    cart: [...state.cart, item],
-                };
+                updatedCart = [...state.cart, item];
             }
-        })
-        .addCase("removeFromCart", (state, action) => {
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
             return {
                 ...state,
-                cart: state.cart.filter((i) => i._id !== action.payload),
+                cart: updatedCart,
             };
         })
-
+        .addCase("removeFromCart", (state, action) => {
+            const updatedCart = state.cart.filter((i) => i._id !== action.payload);
+            localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+            return {
+                ...state,
+                cart: updatedCart,
+            };
+        });
 });
