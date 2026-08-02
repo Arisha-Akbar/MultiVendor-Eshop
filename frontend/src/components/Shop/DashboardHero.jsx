@@ -31,9 +31,7 @@ const DashboardHero = () => {
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
-          ? "greenColor"
-          : "redColor";
+        return params.row.status === "Delivered" ? "greenColor" : "redColor";
       },
     },
     {
@@ -96,13 +94,13 @@ const DashboardHero = () => {
               fill="#00000085"
             />
             <h3
-              className={`${styles.productTitle} !text-[18px] leading-5 !font-normal text-[#00000085]`}
+              className={`${styles.productTitle} text-[18px]! leading-5 font-normal! text-[#00000085]`}
             >
               Account Balance{" "}
               <span className="text-[16px]">(with 10% service charge)</span>
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
+          <h5 className="pt-2 pl-9 text-[22px] font-medium">
             ${availableBalance}
           </h5>
           <Link to="/dashboard-withdraw-money">
@@ -114,12 +112,12 @@ const DashboardHero = () => {
           <div className="flex items-center">
             <MdBorderClear size={30} className="mr-2" fill="#00000085" />
             <h3
-              className={`${styles.productTitle} !text-[18px] leading-5 !font-normal text-[#00000085]`}
+              className={`${styles.productTitle} text-[18px]! leading-5 font-normal! text-[#00000085]`}
             >
               All Orders
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
+          <h5 className="pt-2 pl-9 text-[22px] font-medium">
             {orders && orders.length}
           </h5>
           <Link to="/dashboard-orders">
@@ -135,12 +133,12 @@ const DashboardHero = () => {
               fill="#00000085"
             />
             <h3
-              className={`${styles.productTitle} !text-[18px] leading-5 !font-normal text-[#00000085]`}
+              className={`${styles.productTitle} text-[18px]! leading-5 font-normal! text-[#00000085]`}
             >
               All Products
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-medium">
+          <h5 className="pt-2 pl-9 text-[22px] font-medium">
             {products && products.length}
           </h5>
           <Link to="/dashboard-products">

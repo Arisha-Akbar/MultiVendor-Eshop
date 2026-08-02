@@ -18,16 +18,16 @@ const Footer = () => {
       {/* CTA */}
       <div className="bg-[#1a1a2e] px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <h2 className="text-xl font-medium leading-snug md:w-2/5">
-          <span className="text-teal-400">Subscribe</span> for news, events and
+          <span className="text-amber-400">Subscribe</span> for news, events and
           offers
         </h2>
         <div className="flex gap-2">
           <input
             type="email"
             placeholder="Enter your email..."
-            className="h-9.5 px-4 rounded-lg bg-white/10 border border-white/15 text-sm text-white placeholder-white/40 focus:outline-none focus:border-teal-500 w-55"
+            className="h-9.5 px-4 rounded-lg bg-white/10 border border-white/15 text-sm text-white placeholder-white/40 focus:outline-none focus:border-amber-500 w-55"
           />
-          <button className="h-9.5 px-5 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-lg">
+          <button className="h-9.5 px-5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg">
             Subscribe
           </button>
         </div>
@@ -54,7 +54,7 @@ const Footer = () => {
             ].map((Icon, i) => (
               <div
                 key={i}
-                className="w-8 h-8 rounded-lg border border-white/15 flex items-center justify-center text-white/50 cursor-pointer hover:text-teal-400 hover:border-teal-400/40"
+                className="w-8 h-8 rounded-lg border border-white/15 flex items-center justify-center text-white/50 cursor-pointer hover:text-amber-400 hover:border-amber-400/40"
               >
                 <Icon size={15} />
               </div>
@@ -75,7 +75,7 @@ const Footer = () => {
               <Link
                 key={j}
                 to={link.link}
-                className="block text-sm text-white/40 hover:text-teal-400 py-1 transition"
+                className="block text-sm text-white/40 hover:text-amber-400 py-1 transition"
               >
                 {link.name}
               </Link>

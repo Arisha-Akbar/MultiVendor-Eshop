@@ -13,7 +13,7 @@ import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { RxCross1 } from "react-icons/rx";
-import { categoriesData, productData } from "../../static/data";
+import { categoriesData } from "../../static/data";
 import { server } from "../../server.js";
 import Cart from "../Cart/Cart.jsx";
 import WishList from "../WishList/WishList";
@@ -38,9 +38,11 @@ const Header = ({ activeHeading }) => {
     if (term.trim() === "") {
       setSearchData(null);
     } else {
-      const filteredProducts = productData.filter((product) =>
-        product.name.toLowerCase().includes(term.toLowerCase()),
-      );
+      const filteredProducts = allProducts
+        ? allProducts.filter((product) =>
+            product.name.toLowerCase().includes(term.toLowerCase()),
+          )
+        : [];
       setSearchData(filteredProducts);
     }
   };
@@ -72,7 +74,7 @@ const Header = ({ activeHeading }) => {
               placeholder="Search products..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="w-full h-9.5 px-4 pr-10 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:border-teal-500"
+              className="w-full h-9.5 px-4 pr-10 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:border-amber-500"
             />
             <AiOutlineSearch
               size={18}
@@ -84,7 +86,7 @@ const Header = ({ activeHeading }) => {
                   <Link to={`/product/${i._id}`} key={index}>
                     <div className="flex items-center gap-3 px-3 py-2 hover:bg-gray-50 border-b border-gray-50 last:border-0">
                       <img
-                        src={i.image_Url?.[0]?.url}
+                        src={i.images?.[0]?.url}
                         alt=""
                         className="w-9 h-9 rounded-md object-cover"
                       />
@@ -97,7 +99,7 @@ const Header = ({ activeHeading }) => {
           </div>
 
           <Link to={isSeller ? "/dashboard" : "/shop-create"}>
-            <button className="h-9 px-4 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-lg flex items-center gap-1">
+            <button className="h-9 px-4 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg flex items-center gap-1">
               {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
               <IoIosArrowForward size={14} />
             </button>
@@ -139,7 +141,7 @@ const Header = ({ activeHeading }) => {
               onClick={() => setOpenWishlist(true)}
             >
               <AiOutlineHeart size={20} color="rgba(255,255,255,0.8)" />
-              <span className="absolute top-1 right-1 w-3.75 h-3.75 bg-teal-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
+              <span className="absolute top-1 right-1 w-3.75 h-3.75 bg-amber-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
                 {wishlist?.length}
               </span>
             </div>
@@ -148,7 +150,7 @@ const Header = ({ activeHeading }) => {
               onClick={() => setOpenCart(true)}
             >
               <AiOutlineShoppingCart size={20} color="rgba(255,255,255,0.8)" />
-              <span className="absolute top-1 right-1 w-3.75 h-3.75 bg-teal-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
+              <span className="absolute top-1 right-1 w-3.75 h-3.75 bg-amber-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
                 {cart?.length}
               </span>
             </div>
@@ -158,7 +160,7 @@ const Header = ({ activeHeading }) => {
                   <img
                     src={user?.avatar?.url}
                     alt=""
-                    className="w-8 h-8 rounded-full ring-2 ring-teal-400/50 object-cover"
+                    className="w-8 h-8 rounded-full ring-2 ring-amber-400/50 object-cover"
                   />
                 </Link>
               ) : (
@@ -196,7 +198,7 @@ const Header = ({ activeHeading }) => {
           onClick={() => setOpenCart(true)}
         >
           <AiOutlineShoppingCart size={24} />
-          <span className="absolute -top-1 -right-1 w-3.75 h-3.75 bg-teal-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
+          <span className="absolute -top-1 -right-1 w-3.75 h-3.75 bg-amber-500 rounded-full text-white text-[10px] flex items-center justify-center font-medium">
             {cart?.length}
           </span>
         </div>
@@ -232,7 +234,7 @@ const Header = ({ activeHeading }) => {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="w-full h-9 px-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:border-teal-500"
+                className="w-full h-9 px-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-none focus:border-amber-500"
               />
               {searchData && searchData.length > 0 && (
                 <div className="mt-1 border border-gray-100 rounded-lg overflow-hidden">
@@ -262,7 +264,7 @@ const Header = ({ activeHeading }) => {
             {/* Become seller */}
             <div className="px-4 py-3 border-t border-gray-100">
               <Link to="/shop-create">
-                <button className="w-full h-9 bg-teal-600 text-white text-sm font-medium rounded-lg flex items-center justify-center gap-1">
+                <button className="w-full h-9 bg-amber-600 text-white text-sm font-medium rounded-lg flex items-center justify-center gap-1">
                   Become Seller <IoIosArrowForward size={14} />
                 </button>
               </Link>
@@ -279,7 +281,7 @@ const Header = ({ activeHeading }) => {
                   <img
                     src={user?.avatar?.url}
                     alt=""
-                    className="w-9 h-9 rounded-full object-cover border-2 border-teal-400"
+                    className="w-9 h-9 rounded-full object-cover border-2 border-amber-400"
                   />
                   <span className="text-sm font-medium text-gray-900">
                     {user?.name}
@@ -289,14 +291,14 @@ const Header = ({ activeHeading }) => {
                 <div className="flex gap-2">
                   <Link
                     to="/login"
-                    className="text-sm font-medium text-teal-600"
+                    className="text-sm font-medium text-amber-600"
                   >
                     Login
                   </Link>
                   <span className="text-gray-300">/</span>
                   <Link
                     to="/sign-up"
-                    className="text-sm font-medium text-teal-600"
+                    className="text-sm font-medium text-amber-600"
                   >
                     Sign up
                   </Link>

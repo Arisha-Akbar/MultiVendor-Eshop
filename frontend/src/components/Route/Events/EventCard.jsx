@@ -34,7 +34,7 @@ const EventCard = ({ active, data }) => {
           alt=""
           className="w-full h-full object-cover min-h-55"
         />
-        <span className="absolute top-3 left-3 bg-teal-600 text-white text-xs font-medium px-3 py-1 rounded-md uppercase tracking-wide">
+        <span className="absolute top-3 left-3 bg-amber-600 text-white text-xs font-medium px-3 py-1 rounded-md uppercase tracking-wide">
           Live Event
         </span>
       </div>
@@ -56,7 +56,7 @@ const EventCard = ({ active, data }) => {
           <span className="text-sm text-gray-400 line-through">
             {data?.originalPrice}$
           </span>
-          <span className="ml-auto text-sm text-teal-600 font-medium">
+          <span className="ml-auto text-sm text-amber-600 font-medium">
             {data?.sold_out} sold
           </span>
         </div>
@@ -73,7 +73,7 @@ const EventCard = ({ active, data }) => {
           </Link>
           <button
             onClick={() => addToCartHandler(data)}
-            className="h-10 px-5 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-lg"
+            className="h-10 px-5 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg"
           >
             Add to cart
           </button>

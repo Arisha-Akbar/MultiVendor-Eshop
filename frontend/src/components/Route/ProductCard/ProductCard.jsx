@@ -119,7 +119,7 @@ const ProductCard = ({ data, isEvent }) => {
       {/* Card Body */}
       <div className="p-4 flex flex-col gap-1">
         <Link to={`/shop/preview/${data?.shop._id}`}>
-          <p className="text-xs text-teal-600 font-medium hover:underline">
+          <p className="text-xs text-amber-600 font-medium hover:underline">
             {data.shop.name}
           </p>
         </Link>
@@ -149,7 +149,7 @@ const ProductCard = ({ data, isEvent }) => {
                 </span>
               ) : null}
             </div>
-            <span className="text-xs text-teal-600 font-medium">
+            <span className="text-xs text-amber-600 font-medium">
               {data?.sold_out} sold
             </span>
           </div>

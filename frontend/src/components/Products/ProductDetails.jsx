@@ -121,10 +121,16 @@ const ProductDetails = ({ data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={data && data.images[select]?.url ? data.images[select].url : ''}
+                  src={
+                    data && data.images[select]?.url
+                      ? data.images[select].url
+                      : ""
+                  }
                   alt=""
                   className="w-[80%]"
-                  onError={(e) => { e.target.style.display = 'none'; }}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
                 />
                 <div className="w-full flex">
                   {data &&
@@ -135,11 +141,13 @@ const ProductDetails = ({ data }) => {
                         } cursor-pointer`}
                       >
                         <img
-                          src={i?.url || ''}
+                          src={i?.url || ""}
                           alt=""
                           className="h-50 overflow-hidden mr-3 mt-3"
                           onClick={() => setSelect(index)}
-                          onError={(e) => { e.target.style.display = 'none'; }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
                         />
                       </div>
                     ))}
@@ -165,7 +173,7 @@ const ProductDetails = ({ data }) => {
                 <div className="flex items-center mt-12 justify-between pr-3">
                   <div>
                     <button
-                      className="bg-linear-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                      className="bg-linear-to-r from-amber-400 to-amber-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
                       onClick={decrementCount}
                     >
                       -
@@ -174,7 +182,7 @@ const ProductDetails = ({ data }) => {
                       {count}
                     </span>
                     <button
-                      className="bg-linear-to-r from-teal-400 to-teal-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
+                      className="bg-linear-to-r from-amber-400 to-amber-500 text-white font-bold rounded-l px-4 py-2 shadow-lg hover:opacity-75 transition duration-300 ease-in-out"
                       onClick={incrementCount}
                     >
                       +
@@ -218,7 +226,7 @@ const ProductDetails = ({ data }) => {
                       />
                     ) : (
                       <div className="w-12.5 h-12.5 rounded-full mr-2 bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
-                        {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                        {data.shop.name?.charAt(0)?.toUpperCase() || "S"}
                       </div>
                     )}
                   </Link>
@@ -330,7 +338,7 @@ const ProductDetailsInfo = ({
                   />
                 ) : (
                   <div className="w-12.5 h-12.5 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
-                    {item.user.name?.charAt(0)?.toUpperCase() || 'U'}
+                    {item.user.name?.charAt(0)?.toUpperCase() || "U"}
                   </div>
                 )}
                 <div className="pl-2 ">
@@ -364,7 +372,7 @@ const ProductDetailsInfo = ({
                   />
                 ) : (
                   <div className="w-12.5 h-12.5 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
-                    {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                    {data.shop.name?.charAt(0)?.toUpperCase() || "S"}
                   </div>
                 )}
                 <div className="pl-3">

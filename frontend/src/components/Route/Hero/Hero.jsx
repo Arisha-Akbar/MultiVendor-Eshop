@@ -23,7 +23,7 @@ const Hero = () => {
         </p>
         <Link to="/products" className="inline-block">
           <div
-            className={`mt-6 px-6 py-3 bg-teal-600 hover:bg-teal-700 transition rounded-lg text-white font-medium`}
+            className={`mt-6 px-6 py-3 bg-amber-600 hover:bg-amber-700 transition rounded-lg text-white font-medium`}
           >
             <span className="">Shop Now</span>
           </div>

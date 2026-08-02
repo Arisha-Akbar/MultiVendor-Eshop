@@ -115,7 +115,9 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     className="w-full h-full object-contain p-2"
                   />
                 ) : (
-                  <div className="text-gray-400 text-sm">No Image Available</div>
+                  <div className="text-gray-400 text-sm">
+                    No Image Available
+                  </div>
                 )}
               </div>
 
@@ -133,11 +135,11 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                     />
                   ) : (
                     <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">
-                      {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                      {data.shop.name?.charAt(0)?.toUpperCase() || "S"}
                     </div>
                   )}
                   <div>
-                    <p className="text-sm font-medium text-teal-600">
+                    <p className="text-sm font-medium text-amber-600">
                       {data.shop.name}
                     </p>
                     <p className="text-xs text-gray-400">
@@ -168,11 +170,11 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   />
                 ) : (
                   <div className="w-11 h-11 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500 font-medium">
-                    {data.shop.name?.charAt(0)?.toUpperCase() || 'S'}
+                    {data.shop.name?.charAt(0)?.toUpperCase() || "S"}
                   </div>
                 )}
                 <div>
-                  <p className="text-sm font-medium text-teal-600">
+                  <p className="text-sm font-medium text-amber-600">
                     {data.shop.name}
                   </p>
                   <p className="text-xs text-gray-400">
@@ -250,7 +252,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
             <button
               onClick={() => addToCartHandler(data._id)}
-              className="w-full h-11 flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium rounded-lg transition"
+              className="w-full h-11 flex items-center justify-center gap-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition"
             >
               <AiOutlineShoppingCart size={18} /> Add to cart
             </button>
