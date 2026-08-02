@@ -1,21 +1,22 @@
+import dotenv from "dotenv";
+dotenv.config({
+  path: "./.env",
+});
 import { Server } from "socket.io";
 import http from "http";
 import express, { Router } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+
 const app = express();
 const server = http.createServer(app);
 // create socket server
 const io = new Server(server, {
   cors: {
-   origin: process.env.FRONTEND_URL,
-  methods: ["GET", "POST"],
-},
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST"],
+  },
 });
 
-dotenv.config({
-  path: "./.env",
-});
 app.use(cors());
 app.use(express.json());
 

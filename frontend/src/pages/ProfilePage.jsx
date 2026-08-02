@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Layout/Header";
 import styles from "../styles/style";
 
@@ -12,9 +12,9 @@ const ProfilePage = () => {
       <Header />
       <div className={`${styles.section} flex bg-[#f5f5f5] py-10`}>
         <div className="w-83.75">
-          <ProfileSideBar active={active} setActive={setActive} /> 
+          <ProfileSideBar active={active} setActive={setActive} />
         </div>
-        <ProfileContent />
+        <ProfileContent active={active} />
       </div>
     </div>
   );

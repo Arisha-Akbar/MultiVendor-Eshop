@@ -83,7 +83,7 @@ router.put(
         req.params.id,
         {
           status: "succeed",
-          updatedAt: Date.now(),
+          updatedAt: Date.now,
         },
         { new: true },
       );

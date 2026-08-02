@@ -17,7 +17,7 @@ export const loadSeller = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoadSellerFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -40,7 +40,7 @@ export const getAllSellers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllSellersFailed",
-      //   payload: error.response.data.message,
+      //   payload: error.response?.data?.message || error.message,
     });
   }
 };

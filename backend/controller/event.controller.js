@@ -88,8 +88,7 @@ router.delete(
         );
       }
 
-      await event.remove();
-
+      await event.deleteOne();
       res.status(201).json({
         success: true,
         message: "Event Deleted successfully!",

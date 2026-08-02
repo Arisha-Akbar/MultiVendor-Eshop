@@ -1,10 +1,18 @@
 import express from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
-const app = express();
 import cors from "cors";
 import bodyParser from "body-parser";
 import errorMiddleware from "./middleware/error.js";
+
+// Load env vars FIRST — before anything reads process.env
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  config({
+    path: "config/.env",
+  });
+}
+
+const app = express();
 
 app.use(
   cors({
@@ -20,13 +28,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use("/test", (req, res) => {
   res.send("Hello world!");
 });
-
-// config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  config({
-    path: "config/.env",
-  });
-}
 
 // import routes
 import userRouter from "./controller/user.controller.js";

@@ -35,39 +35,40 @@ export const loginUser = (email, password) => async (dispatch) => {
 };
 
 // signup
-export const createUser = (name, email, password, avatar) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "CreateUserRequest",
-    });
+export const createUser =
+  (name, email, password, avatar) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "CreateUserRequest",
+      });
 
-    const { data } = await axios.post(
-      `${server}/user/create-user`,
-      {
-        name,
-        email,
-        password,
-        avatar,
-      },
-      {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Credentials": true,
+      const { data } = await axios.post(
+        `${server}/user/create-user`,
+        {
+          name,
+          email,
+          password,
+          avatar,
         },
-      },
-    );
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Credentials": true,
+          },
+        },
+      );
 
-    dispatch({
-      type: "CreateUserSuccess",
-      payload: data.message,
-    });
-  } catch (error) {
-    dispatch({
-      type: "CreateUserFail",
-      payload: error.response?.data?.message || "Signup failed",
-    });
-  }
-};
+      dispatch({
+        type: "CreateUserSuccess",
+        payload: data.message,
+      });
+    } catch (error) {
+      dispatch({
+        type: "CreateUserFail",
+        payload: error.response?.data?.message || "Signup failed",
+      });
+    }
+  };
 
 // load user
 export const loadUser = () => async (dispatch) => {
@@ -109,7 +110,7 @@ export const loadSeller = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoadSellerFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -145,7 +146,7 @@ export const updateUserInformation =
     } catch (error) {
       dispatch({
         type: "updateUserInfoFailed",
-        payload: error.response.data.message,
+        payload: error.response?.data?.message || error.message,
       });
     }
   };
@@ -182,7 +183,7 @@ export const updatUserAddress =
     } catch (error) {
       dispatch({
         type: "updateUserAddressFailed",
-        payload: error.response.data.message,
+        payload: error.response?.data?.message || error.message,
       });
     }
   };
@@ -209,7 +210,7 @@ export const deleteUserAddress = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "deleteUserAddressFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -232,7 +233,7 @@ export const getAllUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllUsersFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

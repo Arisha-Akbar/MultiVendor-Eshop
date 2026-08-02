@@ -9,7 +9,7 @@ const shopSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    unique:true,
+    unique: true,
     required: [true, "Please enter your shop email address"],
   },
   password: {
@@ -66,7 +66,7 @@ const shopSchema = new mongoose.Schema({
       },
       createdAt: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
       },
       updatedAt: {
         type: Date,
@@ -75,7 +75,7 @@ const shopSchema = new mongoose.Schema({
   ],
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   resetPasswordToken: String,
   resetPasswordTime: Date,
@@ -101,5 +101,5 @@ shopSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
- const Shop = mongoose.model("Shop", shopSchema);
- export default Shop
+const Shop = mongoose.model("Shop", shopSchema);
+export default Shop;

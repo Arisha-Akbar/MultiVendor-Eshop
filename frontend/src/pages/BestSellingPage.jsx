@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/style";
-import { productData } from "../static/data.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../redux/actions/product";
 
 function BestSellingPage() {
-  const [data, setData] = useState(
-    [...productData].sort((a, b) => b.total_sell - a.total_sell),
-  );
+  const { allProducts, isLoading } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (allProducts && allProducts.length > 0) {
+      const sorted = [...allProducts].sort(
+        (a, b) => (b.sold_out || 0) - (a.sold_out || 0),
+      );
+      setData(sorted);
+    } else {
+      setData([]);
+    }
+  }, [allProducts]);
 
   return (
     <>
@@ -21,6 +37,11 @@ function BestSellingPage() {
             {data &&
               data.map((i, index) => <ProductCard data={i} key={index} />)}
           </div>
+          {data && data.length === 0 && !isLoading ? (
+            <h1 className="text-center w-full pb-25 text-[20px]">
+              No products Found!
+            </h1>
+          ) : null}
         </div>
         <Footer />
       </div>

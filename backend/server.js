@@ -1,4 +1,10 @@
 import { config } from "dotenv";
+// config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  config({
+    path: "config/.env",
+  });
+}
 import app from "./app.js";
 import connectDatabase from "./db/database.js";
 import connectCloudinary from "./config/cloudinary.js";
@@ -16,13 +22,6 @@ process.on("uncaughtException", (err) => {
     process.exit(1);
   });
 });
-
-// config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  config({
-    path: "config/.env",
-  });
-}
 
 // connect database
 

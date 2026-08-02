@@ -9,7 +9,7 @@ export const getAllOrdersOfUser = (userId) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `${server}/order/get-all-orders/${userId}`
+      `${server}/order/get-all-orders/${userId}`,
     );
 
     dispatch({
@@ -19,7 +19,7 @@ export const getAllOrdersOfUser = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllOrdersUserFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -32,7 +32,7 @@ export const getAllOrdersOfShop = (shopId) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `${server}/order/get-seller-all-orders/${shopId}`
+      `${server}/order/get-seller-all-orders/${shopId}`,
     );
 
     dispatch({
@@ -42,7 +42,7 @@ export const getAllOrdersOfShop = (shopId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAllOrdersShopFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -65,7 +65,7 @@ export const getAllOrdersOfAdmin = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "adminAllOrdersFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

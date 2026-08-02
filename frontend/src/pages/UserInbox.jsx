@@ -32,7 +32,7 @@ const UserInbox = () => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
-        createdAt: Date.now(),
+        createdAt: Date.now,
       });
     });
   }, []);

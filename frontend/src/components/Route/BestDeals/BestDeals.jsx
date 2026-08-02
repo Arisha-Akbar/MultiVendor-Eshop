@@ -15,9 +15,10 @@ const BestDeals = () => {
 
   useEffect(() => {
     if (allProducts && allProducts.length > 0) {
-      const d = allProducts
+      const d = [...allProducts]
         .sort((a, b) => (b.sold_out || 0) - (a.sold_out || 0))
         .slice(0, 5);
+
       setData(d);
     }
   }, [allProducts]);

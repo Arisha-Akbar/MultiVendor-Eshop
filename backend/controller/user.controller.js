@@ -11,50 +11,53 @@ import { isAdmin, isAuthenticated } from "../middleware/auth.js";
 const router = Router();
 
 // create user
-router.post("/create-user", catchAsyncErrors(async (req, res, next) => {
-  try {
-    const { name, email, password, avatar } = req.body;
-    const userEmail = await User.findOne({ email });
-
-    if (userEmail) {
-      return next(new ErrorHandler("User already exists", 400));
-    }
-
-    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: "avatars",
-    });
-
-    const user = {
-      name: name,
-      email: email,
-      password: password,
-      avatar: {
-        public_id: myCloud.public_id,
-        url: myCloud.secure_url,
-      },
-    };
-
-    const activationToken = createActivationToken(user);
-
-    const activationUrl = `${process.env.FRONTEND_URL}/activation/${activationToken}`;
-
+router.post(
+  "/create-user",
+  catchAsyncErrors(async (req, res, next) => {
     try {
-      await sendMail({
-        email: user.email,
-        subject: "Activate your account",
-        message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+      const { name, email, password, avatar } = req.body;
+      const userEmail = await User.findOne({ email });
+
+      if (userEmail) {
+        return next(new ErrorHandler("User already exists", 400));
+      }
+
+      const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+        folder: "avatars",
       });
-      res.status(201).json({
-        success: true,
-        message: `please check your email:- ${user.email} to activate your account!`,
-      });
+
+      const user = {
+        name: name,
+        email: email,
+        password: password,
+        avatar: {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        },
+      };
+
+      const activationToken = createActivationToken(user);
+
+      const activationUrl = `${process.env.FRONTEND_URL}/activation/${activationToken}`;
+
+      try {
+        await sendMail({
+          email: user.email,
+          subject: "Activate your account",
+          message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
+        });
+        res.status(201).json({
+          success: true,
+          message: `please check your email:- ${user.email} to activate your account!`,
+        });
+      } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+      }
     } catch (error) {
-      return next(new ErrorHandler(error.message, 500));
+      return next(new ErrorHandler(error.message, 400));
     }
-  } catch (error) {
-    return next(new ErrorHandler(error.message, 400));
-  }
-}));
+  }),
+);
 
 //create activation token
 const createActivationToken = (user) => {
@@ -179,7 +182,184 @@ router.get(
         success: true,
         message: "Logged out successfully",
       });
-    } catch (error) {}
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }),
+);
+
+// update user avatar
+router.put(
+  "/update-avatar",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const existsUser = await User.findById(req.user.id);
+
+      const imageId = existsUser.avatar.public_id;
+
+      await cloudinary.v2.uploader.destroy(imageId);
+
+      const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+      });
+
+      existsUser.avatar = {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      };
+
+      await existsUser.save();
+
+      res.status(200).json({
+        success: true,
+        user: existsUser,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }),
+);
+
+// update user info (name, email, phone number)
+router.put(
+  "/update-user-info",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { name, email, phoneNumber } = req.body;
+
+      const user = await User.findById(req.user.id);
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 400));
+      }
+
+      user.name = name;
+      user.email = email;
+      user.phoneNumber = phoneNumber;
+
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }),
+);
+
+// update user password
+router.put(
+  "/update-user-password",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const { oldPassword, newPassword, confirmPassword } = req.body;
+
+      const user = await User.findById(req.user.id).select("+password");
+
+      if (!user) {
+        return next(new ErrorHandler("User not found", 400));
+      }
+
+      const isPasswordMatched = await user.comparePassword(oldPassword);
+
+      if (!isPasswordMatched) {
+        return next(new ErrorHandler("Old password is incorrect!", 400));
+      }
+
+      if (newPassword !== confirmPassword) {
+        return next(
+          new ErrorHandler(
+            "New password and confirm password do not match!",
+            400,
+          ),
+        );
+      }
+
+      user.password = newPassword;
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        message: "Password updated successfully!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }),
+);
+
+// add / update user address
+router.put(
+  "/update-user-addresses",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const user = await User.findById(req.user.id);
+
+      const sameTypeAddress = user.addresses.find(
+        (address) => address.addressType === req.body.addressType,
+      );
+
+      if (sameTypeAddress) {
+        return next(
+          new ErrorHandler(
+            `${req.body.addressType} address already exists`,
+            400,
+          ),
+        );
+      }
+
+      const existsAddress = user.addresses.find(
+        (address) => address._id === req.body._id,
+      );
+
+      if (existsAddress) {
+        Object.assign(existsAddress, req.body);
+      } else {
+        user.addresses.push(req.body);
+      }
+
+      await user.save();
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  }),
+);
+
+// delete user address
+router.delete(
+  "/delete-user-address/:id",
+  isAuthenticated,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const userId = req.user._id;
+      const addressId = req.params.id;
+
+      await User.updateOne(
+        { _id: userId },
+        { $pull: { addresses: { _id: addressId } } },
+      );
+
+      const user = await User.findById(userId);
+
+      res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
   }),
 );
 
