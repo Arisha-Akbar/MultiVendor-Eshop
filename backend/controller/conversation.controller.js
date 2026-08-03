@@ -73,7 +73,7 @@ router.get(
         members: {
           $in: [req.params.id],
         },
-      }).sort({ updateAt: -1, createdAt: -1 });
+      }).sort({ updatedAt: -1, createdAt: -1 });
 
       res.status(201).json({
         success: true,
